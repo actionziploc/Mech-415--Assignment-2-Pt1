@@ -6,13 +6,13 @@
 #include <cstdlib>
 #include <cstring>
 
-const int NMAX = 2500;
-
 class dMatrix	//class declaration
 {
 public:
 	int N;										//rows
 	int M;										//columns
+	
+	static int n_objects;						//variable that counts the number of instances for dMatrix class
 
 	dMatrix(int n, int m);						//constructor that initializes the matrix to the identity matrix if the matrix is square and zero.
 	dMatrix(char file_name[]);					//constructor that initializes the member variables from a file
@@ -20,10 +20,12 @@ public:
 
 	double max();								//function that returns the maximum value of  the matrix elements
 	double& e(int i, int j);					//access function that returns a reference to the(i, j) element of the matrix
+	double save(char file_name[]);				//function that writes the dMatrix member variables to a binary file
+	double load(char file_name[]);				//function that read the dMatrix member variables from a binary file with the file format.
 
 private:
-	double A[NMAX];								//1D array of doubles
-
+	int* A = new int[N * M];
+	
 };
 
 #endif // !dMatrix_h

@@ -9,29 +9,30 @@
 
 using std::cout;
 using std::cin;
-
-int n_rows()
-{
-	int n{};
-	cout << "\nEnter the number of rows: ";
-	cin >> n;
-
-	return n;
-}
-
-int m_columns()
-{
-	int m{};
-	cout << "\nEnter the number of columns: ";
-	cin >> m;
-
-	return m;
-}
+//
+//int n_rows()
+//{
+//	int n{};
+//	cout << "\nenter the number of rows: ";
+//	cin >> n;
+//
+//	return n;
+//}
+//
+//int m_columns()
+//{
+//	int m{};
+//	cout << "\nenter the number of columns: ";
+//	cin >> m;
+//
+//	return m;
+//}
 
 int main()
 {
 	cout << "Follow the instructions below. \n Press enter to continue...";
 
+	
 	{
 		dMatrix m1{ 3, 3 };
 		dMatrix m2{ 3, 3 };

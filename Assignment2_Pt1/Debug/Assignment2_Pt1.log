@@ -1,0 +1,7 @@
+﻿  Assignment2_Pt1.cpp
+C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dmatrix.h(17,4): error C2059: syntax error: '='
+C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dmatrix.h(17,23): error C2238: unexpected token(s) preceding ';'
+  dMatrix.cpp
+C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dmatrix.h(17,4): error C2059: syntax error: '='
+C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dmatrix.h(17,23): error C2238: unexpected token(s) preceding ';'
+  Generating Code...

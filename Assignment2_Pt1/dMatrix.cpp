@@ -6,40 +6,35 @@
 
 using namespace std;
 
-
-
 //constructor that initializes the matrix to the identity matrix if the matrix is square and zero.
 dMatrix::dMatrix(int n, int m)
 {
 	N = n;
 	M = m;
+	n_objects++;
 
+	cout << "Current instances of dMatrix Class are: " << n_objects;
 	cout << "\nconstructor dMatrix(n, m)\n";
-	if (n * m <= NMAX)
+	if (n == m)
 	{
-		if (n == m)
+		for (int i = 1; i <= m; i++)
 		{
-			for (int i = 1; i <= m; i++)
+			for (int j = 1; j <= n; j++)
 			{
-				for (int j = 1; j <= n; j++)
-				{
 					int k = (j - 1) + (i - 1) * m;
 					A[k] = i == j ? 1 : 0;
-				}
 			}
 		}
 	}
-	else
-	{
-		cout << "Number of columns and rows too big.\n";
-	}
-
 }
+
 
 //destructor that prints out "constructor dMatrix(n,m)"
 dMatrix::~dMatrix()
 {
 	cout << "\ndestructor for dMatrix\n";
+	n_objects--;
+	cout << "\nCurrent instances of dMatrix Class are: " << n_objects;
 }
 
 //constructor that initializes the member variables from a file
@@ -88,6 +83,16 @@ double& dMatrix::e(int i, int j)
 	}
 	int k = (j - 1) + (i - 1) * M;
 	return A[k];
+}
+
+double dMatrix::save(char file_name[])
+{
+	return 0.0;
+}
+
+double dMatrix::load(char file_name[])
+{
+	return 0.0;
 }
 
 //function that adds two matrices; C = A + B
