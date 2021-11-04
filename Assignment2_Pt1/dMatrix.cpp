@@ -4,24 +4,36 @@
 #include "dmatrix.h"
 #include <fstream>
 
+
 using namespace std;
+
+int dMatrix::n_objects;
 
 //constructor that initializes the matrix to the identity matrix if the matrix is square and zero.
 dMatrix::dMatrix(int n, int m)
 {
-	N = n;
-	M = m;
+
+	int N = n;
+	int M = m;
 	n_objects++;
 
 	cout << "Current instances of dMatrix Class are: " << n_objects;
 	cout << "\nconstructor dMatrix(n, m)\n";
+
+	A = new double[N * M];
+
+	for (int i = 0; i < N * M; i++)
+	{
+		A[i] = 0;
+	}
+	
 	if (n == m)
 	{
-		for (int i = 1; i <= m; i++)
+		for (int i = 1; i < m; i++)
 		{
-			for (int j = 1; j <= n; j++)
+			for (int j = 1; j < n; j++)
 			{
-					int k = (j - 1) + (i - 1) * m;
+					int k = (i - 1) + (j - 1) * n;
 					A[k] = i == j ? 1 : 0;
 			}
 		}
@@ -35,6 +47,7 @@ dMatrix::~dMatrix()
 	cout << "\ndestructor for dMatrix\n";
 	n_objects--;
 	cout << "\nCurrent instances of dMatrix Class are: " << n_objects;
+	delete[] A;
 }
 
 //constructor that initializes the member variables from a file
@@ -46,7 +59,7 @@ dMatrix::dMatrix(char file_name[])
 		file >> N;
 		file >> M;
 
-		for (int i = 1; i <= N * M; i++)
+		for (int i = 1; i < N * M; i++)
 		{
 			file >> A[i - 1];
 		}
@@ -76,12 +89,12 @@ double dMatrix::max()
 double& dMatrix::e(int i, int j)
 {
 
-	if (i > N or j > M)
+	if (i > M or j > N)
 	{
 		cout << "Error! Matrix out of bounds." << endl;
 		return A[0];
 	}
-	int k = (j - 1) + (i - 1) * M;
+	int k = (i - 1) + (j - 1) * N;
 	return A[k];
 }
 
@@ -96,7 +109,7 @@ double dMatrix::load(char file_name[])
 }
 
 //function that adds two matrices; C = A + B
-void add(dMatrix& A, dMatrix& B, dMatrix& C)
+void add(dMatrix& A, dMatrix& B, dMatrix& C)    //when call by value is used, the function does not work as intended; the values of the matrices are not passed so we get 'garbage'
 {
 	bool are_rows_equal = A.N == B.N and B.N == C.N;
 	bool are_cols_equal = A.M == B.M and B.M == C.M;
@@ -120,9 +133,9 @@ void add(dMatrix& A, dMatrix& B, dMatrix& C)
 
 void display(dMatrix& matrix)
 {
-	for (int i = 1; i <= matrix.M; i++)
+	for (int j = 1; j <= matrix.N; j++)
 	{
-		for (int j = 1; j <= matrix.N; j++)
+		for (int i = 1; i <= matrix.M; i++)
 		{
 			cout << matrix.e(i, j) << ' ';
 		}

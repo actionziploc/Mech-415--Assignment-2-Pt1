@@ -30,7 +30,7 @@ using std::cin;
 
 int main()
 {
-	cout << "Follow the instructions below. \n Press enter to continue...";
+	cout << "Dynamic Matrix...\n";
 
 	
 	{
@@ -49,10 +49,10 @@ int main()
 	}
 
 	{
-		dMatrix m1{ 3,3 };
+		dMatrix m1{ 3, 2 };
 		display(m1);
 		cout << std::endl;
-		m1.e(2, 3) = 9;
+		m1.e(3, 2) = 9;
 		double res = m1.max();								//max function
 		display(m1);
 		cout << "\nmax value of m1 = " << res << std::endl;

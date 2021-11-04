@@ -14,7 +14,7 @@ public:
 	
 	static int n_objects;						//variable that counts the number of instances for dMatrix class
 
-	dMatrix(int n, int m);						//constructor that initializes the matrix to the identity matrix if the matrix is square and zero.
+	dMatrix(int N, int M);						//constructor that initializes the matrix to the identity matrix if the matrix is square and zero.
 	dMatrix(char file_name[]);					//constructor that initializes the member variables from a file
 	~dMatrix();									//destructor that prints out "constructor dMatrix(n,m)"
 
@@ -24,11 +24,11 @@ public:
 	double load(char file_name[]);				//function that read the dMatrix member variables from a binary file with the file format.
 
 private:
-	int* A = new int[N * M];
+	double* A = nullptr;
 	
 };
 
-#endif // !dMatrix_h
-
 void add(dMatrix& A, dMatrix& B, dMatrix& C);
 void display(dMatrix& matrix);
+
+#endif // !dMatrix_h
