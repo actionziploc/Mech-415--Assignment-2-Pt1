@@ -13,14 +13,14 @@ int dMatrix::n_objects;
 dMatrix::dMatrix(int n, int m)
 {
 
-	int N = n;
-	int M = m;
+	N = n;
+	M = m;
 	n_objects++;
 
-	cout << "Current instances of dMatrix Class are: " << n_objects;
+	cout << "\nCurrent instances of dMatrix Class are: " << n_objects;
 	cout << "\nconstructor dMatrix(n, m)\n";
 
-	A = new double[N * M];
+	A = new double [N * M];
 
 	for (int i = 0; i < N * M; i++)
 	{
@@ -41,7 +41,7 @@ dMatrix::dMatrix(int n, int m)
 }
 
 
-//destructor that prints out "constructor dMatrix(n,m)"
+//destructor that prints out "destructor dMatrix(n,m)"
 dMatrix::~dMatrix()
 {
 	cout << "\ndestructor for dMatrix\n";
@@ -66,7 +66,7 @@ dMatrix::dMatrix(char file_name[])
 	}
 	else
 	{
-		cout << "Unable to open file " << file_name << "... try again chief.\n";
+		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
 	}
 }
 
@@ -91,21 +91,55 @@ double& dMatrix::e(int i, int j)
 
 	if (i > M or j > N)
 	{
-		cout << "Error! Matrix out of bounds." << endl;
+		cout << "\nError! Matrix out of bounds." << endl;
 		return A[0];
 	}
 	int k = (i - 1) + (j - 1) * N;
 	return A[k];
 }
 
-double dMatrix::save(char file_name[])
+//functions that writes dMatrix member variable to a binary file.
+void dMatrix::save(char file_name[])
 {
-	return 0.0;
+	int size = 0;
+	double *iterator = A;
+
+	while (*iterator != NULL) 
+	{
+		size++;
+		iterator++;
+	}
+
+	buffer = new double [size + 2];
+
+	for (int i = 0; i < size + 2; i++)
+	{
+		cout << buffer[i];
+	}
+
+	std::ofstream file (file_name, std::ofstream::binary);
+	if (file.is_open())
+	{
+		file << N;
+		file << M;
+		
+	
+
+		for (int i = 1; i < N * M; i++)
+		{
+			file << A[i - 1];
+		}
+		file.close();
+	}
+	else
+	{
+		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
+	}
 }
 
-double dMatrix::load(char file_name[])
+void dMatrix::load(char file_name[])
 {
-	return 0.0;
+	
 }
 
 //function that adds two matrices; C = A + B
@@ -126,7 +160,7 @@ void add(dMatrix& A, dMatrix& B, dMatrix& C)    //when call by value is used, th
 	}
 	else
 	{
-		cout << "Matrix dimensions are not equal.. try again chief.\n";
+		cout << "\nMatrix dimensions are not equal.. try again chief.\n";
 	}
 
 }
