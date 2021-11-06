@@ -46,22 +46,28 @@ dMatrix::~dMatrix()
 {
 	cout << "\ndestructor for dMatrix\n";
 	n_objects--;
-	cout << "\nCurrent instances of dMatrix Class are: " << n_objects;
-	delete[] A;
+	cout << "\nCurrent instances of dMatrix Class are: " << n_objects << "\n";
+	delete A;
 }
 
 //constructor that initializes the member variables from a file
 dMatrix::dMatrix(char file_name[])
 {
-	std::ifstream file = std::ifstream(file_name);
+	A = new double[N * M];
+
+	for (int i = 0; i < N * M; i++)
+	{
+		A[i] = 0;
+	}
+	ifstream file = ifstream(file_name);
 	if (file.is_open())
 	{
 		file >> N;
 		file >> M;
-
-		for (int i = 1; i < N * M; i++)
+		 
+		for (int i = 0; i < N * M; i++)
 		{
-			file >> A[i - 1];
+			file >> A[i];
 		}
 	}
 	else
@@ -102,34 +108,31 @@ double& dMatrix::e(int i, int j)
 void dMatrix::save(char file_name[])
 {
 	int size = 0;
-	double *iterator = A;
+	double* iterator = A;
 
-	while (*iterator != NULL) 
+	while (*iterator != NULL)
 	{
 		size++;
 		iterator++;
 	}
 
-	buffer = new double [size + 2];
+	buffer = new double[size + 2];
+	buffer[0] = N;
+	buffer[1] = M;
 
-	for (int i = 0; i < size + 2; i++)
-	{
-		cout << buffer[i];
-	}
-
-	std::ofstream file (file_name, std::ofstream::binary);
+	ofstream file = ofstream(file_name, std::ios::binary);
 	if (file.is_open())
 	{
-		file << N;
-		file << M;
 		
-	
+		file << buffer [0];
+		file << buffer [1];
 
-		for (int i = 1; i < N * M; i++)
+		for (int i = 2; i < size + 2; i++)
 		{
-			file << A[i - 1];
+			buffer[i] = A[i];
+			file << buffer[i];
 		}
-		file.close();
+
 	}
 	else
 	{
@@ -139,7 +142,37 @@ void dMatrix::save(char file_name[])
 
 void dMatrix::load(char file_name[])
 {
+	int size = 0;
+	double* iterator = A;
+
+	while (*iterator != NULL)
+	{
+		size++;
+		iterator++;
+	}
+
+	buffer = new double[size + 2];
+	buffer[0] = N;
+	buffer[1] = M;
 	
+	ofstream file = ofstream(file_name, std::ios::binary);
+	if (file.is_open())
+	{
+
+		file << buffer[0];
+		file << buffer[1];
+
+		for (int i = 2; i < size + 2; i++)
+		{
+			buffer[i] = A[i];
+			file << buffer[i];
+		}
+
+	}
+	else
+	{
+		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
+	}
 }
 
 //function that adds two matrices; C = A + B

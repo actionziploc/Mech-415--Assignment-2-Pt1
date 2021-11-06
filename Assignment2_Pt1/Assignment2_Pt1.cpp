@@ -52,6 +52,7 @@ int main()
 		dMatrix m1{ 3, 3 };
 		display(m1);
 		cout << std::endl;
+		m1.e(2, 2) = 10;
 		m1.e(3, 3) = 9;
 		double res = m1.max();								//max function
 		display(m1);
@@ -62,9 +63,22 @@ int main()
 	{
 		char file[] = "matrix.txt";
 		dMatrix m1(file);									//read file function
-		cout << "Matrix in matrix.txt is: \n";
+		cout << "\nMatrix in matrix.txt is: \n";
 		display(m1);
 	}
+
+	{
+		dMatrix m1{ 2,2 };
+		m1.e(1, 1) = 2;
+		m1.e(1, 2) = 3;
+		m1.e(2, 1) = 1;
+		m1.e(2, 2) = 6;
+		char file[] = "matrix.bin";
+		dMatrix save(file);								//save N, M, array in binary file function
+		cout << "\nMatrix written to binary file is: \n";
+		display(m1);
+	}
+
 
 	system("pause");
 
