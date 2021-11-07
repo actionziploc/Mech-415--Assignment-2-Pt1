@@ -1,6 +1,5 @@
 ﻿  dMatrix.cpp
-C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dMatrix.cpp(152,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dMatrix.cpp(153,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\dMatrix.cpp(140,26): warning C4244: 'initializing': conversion from 'std::streamsize' to 'unsigned int', possible loss of data
 LINK : warning LNK4300: ignoring '/INCREMENTAL' because input module contains ASAN metadata
 Assignment2_Pt1.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
   Assignment2_Pt1.vcxproj -> C:\Users\karla\Google Drive\School\2021-2022\Fall 2021\Mech 415\Assignments\Mech 415 - Assignment 2\Mech 415 -Assignment 2 Pt1\Assignment2_Pt1\Debug\Assignment2_Pt1.exe

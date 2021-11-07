@@ -107,70 +107,53 @@ double& dMatrix::e(int i, int j)
 //functions that writes dMatrix member variable to a binary file.
 void dMatrix::save(char file_name[])
 {
-	int size = 0;
-	double* iterator = A;
+	int size = N * M + 2;
+	buffer = new double [size];
+	buffer[0] = static_cast <double> (N);
+	buffer[1] = static_cast <double> (M);
 
-	while (*iterator != NULL)
+	for (int i = 0; i < N * M; i++)
 	{
-		size++;
-		iterator++;
+		buffer[i+2] = A[i];
 	}
 
-	buffer = new double[size + 2];
-	buffer[0] = N;
-	buffer[1] = M;
+	ofstream file = ofstream(file_name, ios::binary | ios::out);
 
-	ofstream file = ofstream(file_name, ios::binary);
-	
 	if (file.is_open())
 	{
-		for (int i = 2; i < size + 2; i++)
-		{
-			buffer[i] = A[i];
-		}
-		file << buffer;
+		file.write(reinterpret_cast <char*>(buffer), size* sizeof(double));
 	}
 	else
 	{
 		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
 	}
+	delete[] buffer;
 }
 
 void dMatrix::load(char file_name[])
 {
 	
-	/*int size = 0;
-	double* iterator = buffer;
+	ifstream file = ifstream(file_name, ios::binary | ios::ate);
+	streamsize size = file.tellg();
+	file.seekg(0, ios::beg);
 
-	while (*iterator != NULL)
-	{
-		size++;
-		iterator++;
-	}*/
-
-	A = new double[N*M];
+	char* buffer = new char[size];
 	
-	ifstream file = ifstream(file_name, ios::binary);
-	if (file.is_open())
+	if (file.read(buffer,size))
 	{
+		auto* buffer_doubles = reinterpret_cast<double*>(buffer);
 
-		N = buffer[0];
-		M = buffer[1];
-		
-		file >> N;
-		file >> M;
-
-		for (int i = 2; i < N*M +2; i++)
+		for (int i = 0; i < N*M; i++)
 		{
-			A[i] = buffer[i];
-			file >> A[i];
+			A[i] = buffer_doubles [i + 2];
 		}
 	}
 	else
 	{
-		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
+		cout << "\nUnable to read file " << file_name << "... try again chief.\n";
 	}
 
+	delete[] buffer;
 }
 
 //function that adds two matrices; C = A + B

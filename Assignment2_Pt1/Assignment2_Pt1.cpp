@@ -83,10 +83,10 @@ int main()
 		dMatrix m2{ 2,2 };
 		m2.load(file);
 		
-		cout << "\nMatrix written to binary file is: \n";
+		cout << "\nMatrix A written to binary file is: \n";
 		display(m1);
 
-		cout << "\nMatrix retrieved from binary file is: \n";
+		cout << "\nMatrix B retrieved from binary file is: \n";
 		display(m2);
 	}
 
