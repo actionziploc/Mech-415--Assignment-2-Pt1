@@ -68,15 +68,26 @@ int main()
 	}
 
 	{
-		dMatrix m1{ 2,2 };
-		m1.e(1, 1) = 2;
-		m1.e(1, 2) = 3;
-		m1.e(2, 1) = 1;
-		m1.e(2, 2) = 6;
+		dMatrix m1{ 2, 3 };
+		for (int i = 1; i <= m1.M; i++)
+		{
+			for (int j = 1; j <= m1.N; j++)
+			{
+				m1.e(i, j) = i - j + 3.0;
+			}
+		}
+
 		char file[] = "matrix.bin";
-		dMatrix save(file);								//save N, M, array in binary file function
+		m1.save(file);										//save N, M, array in binary file function
+
+		dMatrix m2{ 2,2 };
+		m2.load(file);
+		
 		cout << "\nMatrix written to binary file is: \n";
 		display(m1);
+
+		cout << "\nMatrix retrieved from binary file is: \n";
+		display(m2);
 	}
 
 

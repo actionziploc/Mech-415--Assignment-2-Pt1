@@ -120,19 +120,15 @@ void dMatrix::save(char file_name[])
 	buffer[0] = N;
 	buffer[1] = M;
 
-	ofstream file = ofstream(file_name, std::ios::binary);
+	ofstream file = ofstream(file_name, ios::binary);
+	
 	if (file.is_open())
 	{
-		
-		file << buffer [0];
-		file << buffer [1];
-
 		for (int i = 2; i < size + 2; i++)
 		{
 			buffer[i] = A[i];
-			file << buffer[i];
 		}
-
+		file << buffer;
 	}
 	else
 	{
@@ -142,37 +138,39 @@ void dMatrix::save(char file_name[])
 
 void dMatrix::load(char file_name[])
 {
-	int size = 0;
-	double* iterator = A;
+	
+	/*int size = 0;
+	double* iterator = buffer;
 
 	while (*iterator != NULL)
 	{
 		size++;
 		iterator++;
-	}
+	}*/
 
-	buffer = new double[size + 2];
-	buffer[0] = N;
-	buffer[1] = M;
+	A = new double[N*M];
 	
-	ofstream file = ofstream(file_name, std::ios::binary);
+	ifstream file = ifstream(file_name, ios::binary);
 	if (file.is_open())
 	{
 
-		file << buffer[0];
-		file << buffer[1];
+		N = buffer[0];
+		M = buffer[1];
+		
+		file >> N;
+		file >> M;
 
-		for (int i = 2; i < size + 2; i++)
+		for (int i = 2; i < N*M +2; i++)
 		{
-			buffer[i] = A[i];
-			file << buffer[i];
+			A[i] = buffer[i];
+			file >> A[i];
 		}
-
 	}
 	else
 	{
 		cout << "\nUnable to open file " << file_name << "... try again chief.\n";
 	}
+
 }
 
 //function that adds two matrices; C = A + B
